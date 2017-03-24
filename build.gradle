@@ -1,0 +1,63 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group 'com.zathruswriter'
+
+version '1.0'
+
+ext {
+    BUKKIT_API_VERSION = '1.11.2-R0.1-SNAPSHOT'
+    BUILD_DIR = "build/${group}".toString()
+    FINAL_DIR = 'Plugins/'
+    MAIN_CLASS = "${group}.PacketRecorder".toString()
+}
+
+buildDir = BUILD_DIR
+
+sourceSets {
+	main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test']
+        }
+	}
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+	maven {
+        name "Spigot"
+        url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        name "BungeeCord"
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+	}
+}
+
+dependencies {
+	// Spigot API
+    compile group: 'org.spigotmc',
+            name: 'spigot-api',
+			version: BUKKIT_API_VERSION
+}
+
+jar {
+   baseName = 'packetrecorder'
+   includeEmptyDirs = false
+}
+
+task copy(type: Copy) {
+    from "${buildDir}/libs"
+    into "$FINAL_DIR"
+}
+
+check.dependsOn copy
