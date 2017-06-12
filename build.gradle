@@ -47,7 +47,7 @@ dependencies {
 	// Spigot API
     compile group: 'org.spigotmc',
             name: 'spigot-api',
-			version: BUKKIT_API_VERSION
+			version: BUKKIT_API_VERSION // spigot-api-1.11.2-R0.1-SNAPSHOT.jar
 }
 
 jar {
@@ -60,4 +60,10 @@ task copy(type: Copy) {
     into "$FINAL_DIR"
 }
 
+task copyDependencies(type: Copy) {
+   from configurations.compile
+   into 'dependencies'
+}
+
 check.dependsOn copy
+check.dependsOn copyDependencies
