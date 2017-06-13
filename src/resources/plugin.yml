@@ -1,5 +1,6 @@
 name: Bukkit and Spigot Packet Recorder
 main: com.zathruswriter.packetrecorder.PacketRecorder
 version: 0.0.1
+depend: [ProtocolLib]
 authors: [ZathrusWriter]
 description: Records and replays packets of players logged onto the Minecraft Spigot / CraftBukkit server.
