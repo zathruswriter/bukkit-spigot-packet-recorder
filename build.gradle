@@ -7,6 +7,7 @@ version '1.0'
 
 ext {
     BUKKIT_API_VERSION = '1.11.2-R0.1-SNAPSHOT'
+    PROTOCOLLIB_VERSION = '4.2.1'
     BUILD_DIR = "build/${group}".toString()
     FINAL_DIR = 'Plugins/'
     MAIN_CLASS = "${group}.PacketRecorder".toString()
@@ -41,6 +42,10 @@ repositories {
         name "BungeeCord"
         url 'https://oss.sonatype.org/content/repositories/snapshots/'
 	}
+	maven {
+        name "ProtocolLib"
+    	url "http://repo.dmulloy2.net/nexus/repository/public/"
+    }
 }
 
 dependencies {
@@ -48,6 +53,11 @@ dependencies {
     compile group: 'org.spigotmc',
             name: 'spigot-api',
 			version: BUKKIT_API_VERSION // spigot-api-1.11.2-R0.1-SNAPSHOT.jar
+	
+	// ProtocolLib
+    compile group: 'com.comphenix.protocol',
+            name: 'ProtocolLib',
+            version: PROTOCOLLIB_VERSION
 }
 
 jar {
@@ -65,5 +75,5 @@ task copyDependencies(type: Copy) {
    into 'dependencies'
 }
 
-check.dependsOn copy
-check.dependsOn copyDependencies
+assemble.dependsOn copy
+assemble.dependsOn copyDependencies
