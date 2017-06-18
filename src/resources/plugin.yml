@@ -1,4 +1,4 @@
-name: Bukkit and Spigot Packet Recorder
+name: Bukkit-Spigot-Packet-Recorder
 main: com.zathruswriter.packetrecorder.PacketRecorder
 version: 0.0.1
 depend: [ProtocolLib]
