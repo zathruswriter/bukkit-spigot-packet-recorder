@@ -51,8 +51,8 @@ repositories {
 dependencies {
 	// Spigot API
     compile group: 'org.spigotmc',
-            name: 'spigot-api',
-			version: BUKKIT_API_VERSION // spigot-api-1.11.2-R0.1-SNAPSHOT.jar
+            name: 'spigot',
+			version: BUKKIT_API_VERSION // spigot-1.11.2-R0.1-SNAPSHOT.jar
 	
 	// ProtocolLib
     compile group: 'com.comphenix.protocol',
@@ -66,6 +66,7 @@ jar {
 }
 
 task copy(type: Copy) {
+	dependsOn jar
     from "${buildDir}/libs"
     into "$FINAL_DIR"
 }
@@ -75,5 +76,10 @@ task copyDependencies(type: Copy) {
    into 'dependencies'
 }
 
-assemble.dependsOn copy
+assemble.dependsOn clean
 assemble.dependsOn copyDependencies
+assemble.dependsOn copy
+
+build.dependsOn clean
+build.dependsOn copyDependencies
+build.dependsOn copy
